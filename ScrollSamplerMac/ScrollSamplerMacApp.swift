@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct ScrollSamplerMacApp: App {
+    @StateObject private var presetsModel = PresetsDataModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(presetsModel)
         }
+        
         
     }
 }

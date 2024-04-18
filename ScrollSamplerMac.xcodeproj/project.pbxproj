@@ -13,6 +13,9 @@
 		B519E1C72BD1422A00A2C786 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B519E1C62BD1422A00A2C786 /* Preview Assets.xcassets */; };
 		B519E1CF2BD1427100A2C786 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1CE2BD1427100A2C786 /* DataModel.swift */; };
 		B519E1D12BD1600B00A2C786 /* PresetsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D02BD1600B00A2C786 /* PresetsDataModel.swift */; };
+		B519E1D32BD171B400A2C786 /* SavePresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D22BD171B400A2C786 /* SavePresetView.swift */; };
+		B519E1D52BD171D700A2C786 /* ScrollingRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D42BD171D700A2C786 /* ScrollingRectangle.swift */; };
+		B519E1D72BD1720800A2C786 /* CreateModifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D62BD1720800A2C786 /* CreateModifierView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		B519E1C82BD1422A00A2C786 /* ScrollSamplerMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScrollSamplerMac.entitlements; sourceTree = "<group>"; };
 		B519E1CE2BD1427100A2C786 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B519E1D02BD1600B00A2C786 /* PresetsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsDataModel.swift; sourceTree = "<group>"; };
+		B519E1D22BD171B400A2C786 /* SavePresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePresetView.swift; sourceTree = "<group>"; };
+		B519E1D42BD171D700A2C786 /* ScrollingRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingRectangle.swift; sourceTree = "<group>"; };
+		B519E1D62BD1720800A2C786 /* CreateModifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateModifierView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			children = (
 				B519E1BF2BD1422700A2C786 /* ScrollSamplerMacApp.swift */,
 				B519E1C12BD1422700A2C786 /* ContentView.swift */,
+				B519E1D42BD171D700A2C786 /* ScrollingRectangle.swift */,
+				B519E1D62BD1720800A2C786 /* CreateModifierView.swift */,
+				B519E1D22BD171B400A2C786 /* SavePresetView.swift */,
 				B519E1CE2BD1427100A2C786 /* DataModel.swift */,
 				B519E1D02BD1600B00A2C786 /* PresetsDataModel.swift */,
 				B519E1C32BD1422A00A2C786 /* Assets.xcassets */,
@@ -145,10 +154,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B519E1D32BD171B400A2C786 /* SavePresetView.swift in Sources */,
+				B519E1D72BD1720800A2C786 /* CreateModifierView.swift in Sources */,
 				B519E1C22BD1422700A2C786 /* ContentView.swift in Sources */,
 				B519E1CF2BD1427100A2C786 /* DataModel.swift in Sources */,
 				B519E1D12BD1600B00A2C786 /* PresetsDataModel.swift in Sources */,
 				B519E1C02BD1422700A2C786 /* ScrollSamplerMacApp.swift in Sources */,
+				B519E1D52BD171D700A2C786 /* ScrollingRectangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

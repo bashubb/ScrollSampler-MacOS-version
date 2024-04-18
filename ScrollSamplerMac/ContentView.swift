@@ -10,13 +10,15 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @EnvironmentObject var presetsModel: PresetsDataModel
     @State private var dataModel = DataModel()
-    @State private var presetsModel = PresetsDataModel()
     @State private var vertical = true
     
     
     @State private var modifierNameWindowShowing = false
     @State private var modifierName = ""
+    
+    @State var savePresetViewShowing = false
     
     let formatter: NumberFormatter
     
@@ -58,18 +60,20 @@ struct ContentView: View {
                 .padding()
                 .buttonStyle(.plain)
                 
-                
-                
                 List {
-                    Picker("Preset Selection", selection: $dataModel) {
-                        ForEach(presetsModel.presets, id:\.self) { preset in
-                            Text(preset.name).tag(preset)
-                        }
-                    }
                     Section("Presets") {
-                        Button ("Edge opacity") {
-                            dataModel = DataModel()
-                            
+                        Menu{
+                            ForEach(presetsModel.presets) { preset in
+                                Button(preset.name) {
+                                    dataModel = preset
+                                }
+                            }
+                        } label: {
+                            Text(dataModel.name)
+                        }
+                        
+                        Button("Save new preset"){
+                            savePresetViewShowing.toggle()
                         }
                     }
                     
@@ -177,12 +181,12 @@ struct ContentView: View {
         }
         .toolbar(.hidden, for: .windowToolbar)
         .sheet(isPresented: $modifierNameWindowShowing){
-            ModifierGenerateView(modifierName: $modifierName){
+            CreateModifierView(modifierName: $modifierName){
                 createModifier($0)
             }
         }
-        .sheet(isPresented: $presetsModel.savePresetViewShowing) {
-            PresetViewShowing()
+        .sheet(isPresented: $savePresetViewShowing) {
+            SavePresetView(dataModel: dataModel)
         }
         
     }
@@ -233,84 +237,11 @@ struct ContentView: View {
 }
 
 
-struct ScrollingRectangle: View {
-    var dataModel: DataModel
-    
-    var body: some View {
-        Rectangle()
-            .fill(.blue)
-            .scrollTransition { content, phase in
-                content
-                    .opacity(dataModel(\.opacity, for: phase))
-                    .offset(x: dataModel(\.xOffset, for: phase))
-                    .offset(y: dataModel(\.yOffset, for: phase))
-                    .scaleEffect(dataModel(\.scale, for: phase))
-                    .blur(radius: (dataModel(\.blur, for: phase)))
-                    .saturation(dataModel(\.saturation, for: phase))
-                    .rotation3DEffect(
-                        Angle(degrees: dataModel(\.degrees, for: phase)),
-                        axis: (
-                            x: CGFloat(dataModel(\.rotationX, for: phase)),
-                            y: CGFloat(dataModel(\.rotationY, for: phase)),
-                            z: CGFloat(dataModel(\.rotationZ, for: phase))
-                        ))
-            }
-    }
-}
+
 
 #Preview{
     ContentView()
 }
 
-struct ModifierGenerateView: View {
-    @Environment(\.dismiss) var dismiss
-    
-    @Binding var modifierName: String
-    @State private var buttonText = "Copy modifer to clipboard"
-    
-    private let pasteboard = NSPasteboard.general
-    var createModifier: (String) -> String
-    
-    var body: some View {
-        VStack(alignment:.leading) {
-            Text("Generate Modifier")
-                .font(.title)
-                .padding()
-            Divider()
-            TextField("Modifier Name", text: $modifierName)
-                .background(.bar)
-                .textFieldStyle(.roundedBorder)
-                .padding()
-            
-            Button(buttonText) {
-                pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-                pasteboard.setString(createModifier(modifierName), forType: .string)
-                
-                withAnimation {
-                    buttonText = "Copied!"
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        buttonText = "Copy modifer to clipboard"
-                    }
-                }
-                modifierName = ""
-                dismiss()
-            }
-            .disabled(modifierName == "")
-            .buttonStyle(.borderedProminent)
-            
-        }
-        .padding()
-        .toolbar{
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel", role: .cancel) {
-                    modifierName = ""
-                    dismiss()
-                }
-            }
-        }
-        .toolbarTitleDisplayMode(.inline)
-        
-    }
-}
 
 

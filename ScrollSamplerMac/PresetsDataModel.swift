@@ -7,29 +7,34 @@
 
 import Foundation
 
-@Observable
-class PresetsDataModel {
+class PresetsDataModel: ObservableObject {
+    enum CodingKeys: String, CodingKey {
+        case _presets = "presets"
+    }
     
-    var savePresetViewShowing = false
-    var presets = [DataModel]()
-    
-
+    @Published var presets = [DataModel]() {
+        didSet{
+            presets.forEach{ print($0.name) }
+            print("-------")
+        }
+    }
     
     init() {
-        let defaultPreset = DataModel()
-        
-        let edgeOpacity = DataModel()
-        edgeOpacity.name = "Edge Opacity"
-        edgeOpacity.variants[0].opacity = 0.0
-        edgeOpacity.variants[2].opacity = 0.0
-        
-        self.presets.append(edgeOpacity)
-        self.presets.append(defaultPreset)
+        if presets.isEmpty {
+            let defaultPreset = DataModel()
+            let edgeOpacity = DataModel()
+            edgeOpacity.name = "Edge Opacity"
+            edgeOpacity.variants[0].opacity = 0.0
+            edgeOpacity.variants[2].opacity = 0.0
+            
+            self.presets.append(edgeOpacity)
+            self.presets.append(defaultPreset)
+        }
         
     }
     
     func copyPreset(name: String, dataModel: DataModel) -> DataModel {
-        var newPreset = DataModel()
+        let newPreset = DataModel()
         newPreset.name = name
         for (index, variant) in dataModel.variants.enumerated() {
             newPreset.variants[index].id = variant.id
@@ -47,7 +52,8 @@ class PresetsDataModel {
        return newPreset
     }
     
-    func savePreset(_ preset: DataModel, in presetsCollection: inout [DataModel]) -> Void {
-        presetsCollection.append(preset)
+    func savePreset(_ preset: DataModel) -> Void {
+        presets.append(preset)
+        
     }
 }
