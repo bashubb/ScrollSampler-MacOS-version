@@ -13,6 +13,7 @@ struct ScrollSamplerMacApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .navigationTitle("Scroll Sampler")
                 .environmentObject(presetsModel)
         }
         

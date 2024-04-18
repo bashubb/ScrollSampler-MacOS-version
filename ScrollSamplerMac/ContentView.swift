@@ -18,7 +18,12 @@ struct ContentView: View {
     @State private var modifierNameWindowShowing = false
     @State private var modifierName = ""
     
-    @State var savePresetViewShowing = false
+    @State private var savePresetViewShowing = false
+    
+    @State private var rectangleColor: Color = .blue
+    @State private var rectangleSize = 100
+    @State private var backgroundColor: Color = .clear
+    @State private var paddingSize = 0
     
     let formatter: NumberFormatter
     
@@ -61,16 +66,34 @@ struct ContentView: View {
                 .buttonStyle(.plain)
                 
                 List {
-                    Section("Presets") {
-                        Menu{
-                            ForEach(presetsModel.presets) { preset in
-                                Button(preset.name) {
-                                    dataModel = preset
-                                }
-                            }
-                        } label: {
-                            Text(dataModel.name)
+                    Section("Content Options") {
+                        ColorPicker("Content Color", selection: $rectangleColor, supportsOpacity: true)
+                            .pickerStyle(.palette)
+                        HStack {
+                            ColorPicker("Background Color", selection: $backgroundColor, supportsOpacity: true)
+                                .pickerStyle(.palette)
+                            Button("Clear") { backgroundColor = .clear }
                         }
+                        Picker("Content Size", selection: $rectangleSize) {
+                                Text("Small").tag(100)
+                                Text("Medium").tag(200)
+                                Text("Big").tag(300)
+                        }
+                        Picker("Padding", selection: $paddingSize) {
+                            Text("None").tag(0)
+                            Text("Small").tag(10)
+                            Text("Medium").tag(20)
+                            Text("Big").tag(40)
+                        }
+                        
+                    }
+                    Section("Presets") {
+                        Picker("Select Preset", selection: $dataModel){
+                            ForEach(presetsModel.presets) { preset in
+                                Text(preset.name).tag(preset)
+                            }
+                        }
+                    
                         
                         Button("Save new preset"){
                             savePresetViewShowing.toggle()
@@ -84,60 +107,70 @@ struct ContentView: View {
                             Group {
                                 HStack {
                                     Text("Opacity")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.opacity) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.opacity, in: 0...1)
                                 }
                                 HStack {
                                     Text("Scale")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.scale) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.scale, in: 0...3)
                                 }
                                 HStack {
-                                    Text("xOffset")
+                                    Text("X Offset")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.xOffset) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.xOffset, in: -1000...1000)
                                 }
                                 HStack {
-                                    Text("yOffset")
+                                    Text("Y Offset")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.yOffset) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.yOffset, in: 0...1000)
                                 }
                                 HStack {
-                                    Text("blur")
+                                    Text("Blur")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.blur) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.blur, in: 0...50)
                                 }
                                 HStack {
-                                    Text("saturation")
+                                    Text("Saturation")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.saturation) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.saturation, in: 0...1)
                                 }
                                 HStack {
-                                    Text("Rotation degrees")
+                                    Text("Rotation Degrees")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.degrees) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.degrees, in: -180...180)
                                 }
                                 HStack {
-                                    Text ("Rotation x axis")
+                                    Text ("Rotation X Axis")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.rotationX) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.rotationX, in: 0...1)
                                 }
                                 HStack {
-                                    Text("Rotation y axis")
+                                    Text("Rotation Y Axis")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.rotationY) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.rotationY, in: 0...1)
                                 }
                                 HStack {
-                                    Text("Rotation z axis")
+                                    Text("Rotation Z Axis")
+                                        .font(.headline)
                                     Text(formatter.string(for:variant.rotationZ) ?? "")
                                         .font(.caption)
                                     Slider(value: $variant.rotationZ, in: 0...1)
@@ -156,12 +189,14 @@ struct ContentView: View {
                 ScrollView {
                     VStack {
                         ForEach(0..<100) { i in
-                            ScrollingRectangle(dataModel: dataModel)
-                                .frame(height:100)
+                            ScrollingRectangle(color: rectangleColor,dataModel: dataModel)
+                                .frame(height: CGFloat(rectangleSize))
+                                .padding(CGFloat(paddingSize))
                         }
                     }
                     .padding()
                 }
+                .background(backgroundColor)
                 .toolbar(.hidden)
                 .ignoresSafeArea()
             }
@@ -169,17 +204,17 @@ struct ContentView: View {
                 ScrollView(.horizontal) {
                     HStack {
                         ForEach(0..<100) { i in
-                            ScrollingRectangle(dataModel: dataModel)
-                                .frame(width:100)
+                            ScrollingRectangle(color: rectangleColor, dataModel: dataModel)
+                                .frame(width: CGFloat(rectangleSize))
+                                .padding(CGFloat(paddingSize))
                         }
                     }
                     .padding()
-                    
                 }
+                .background(backgroundColor)
                 .ignoresSafeArea()
             }
         }
-        .toolbar(.hidden, for: .windowToolbar)
         .sheet(isPresented: $modifierNameWindowShowing){
             CreateModifierView(modifierName: $modifierName){
                 createModifier($0)
@@ -241,6 +276,7 @@ struct ContentView: View {
 
 #Preview{
     ContentView()
+        .environmentObject(PresetsDataModel())
 }
 
 

@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ScrollingRectangle: View {
+    var color: Color
     var dataModel: DataModel
     
     var body: some View {
         Rectangle()
-            .fill(.blue)
+            .fill(color)
             .scrollTransition { content, phase in
                 content
                     .opacity(dataModel(\.opacity, for: phase))
