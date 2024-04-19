@@ -1,0 +1,1 @@
+# ScrollSampler-MacOS-version
