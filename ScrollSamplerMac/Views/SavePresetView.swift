@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SavePresetView: View {
-    @EnvironmentObject var presetsModel: PresetsDataModel
+    @Environment(PresetsDataModel.self) var presetsModel
     var dataModel: DataModel
     
     @Environment(\.dismiss) var dismiss
@@ -29,7 +29,7 @@ struct SavePresetView: View {
                 .padding()
             
             Button(buttonText) {
-                presetsModel.savePreset(presetsModel.copyPreset(name: presetName, dataModel: dataModel))
+                presetsModel.insertPreset(presetsModel.copyPreset(name: presetName, dataModel: dataModel))
                 
                 withAnimation {
                     

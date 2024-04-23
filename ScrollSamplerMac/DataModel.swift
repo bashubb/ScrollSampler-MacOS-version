@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-
+import SwiftData
 
 @Observable
 class DataModel: Identifiable, Hashable {
@@ -72,3 +71,5 @@ class TransitionVariant: Identifiable {
         
     }
 }
+
+

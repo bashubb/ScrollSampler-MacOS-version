@@ -7,11 +7,14 @@
 
 import AppKit
 import SwiftUI
+import SwiftData
 
 
 struct ContentView: View {
-    @EnvironmentObject var presetsModel: PresetsDataModel
+    @Environment(PresetsDataModel.self) var presetsModel
     @State private var dataModel = DataModel()
+    @State private var selectedPreset = Preset()
+    
     @State private var vertical = true
     
     
@@ -24,6 +27,7 @@ struct ContentView: View {
     @State private var rectangleSize = 100
     @State private var backgroundColor: Color = .clear
     @State private var paddingSize = 0
+    
     
     let formatter: NumberFormatter
     
@@ -88,9 +92,26 @@ struct ContentView: View {
                         
                     }
                     Section("Presets") {
-                        Picker("Select Preset", selection: $dataModel){
-                            ForEach(presetsModel.presets) { preset in
-                                Text(preset.name).tag(preset)
+                        HStack {
+                            Text("Select Preset")
+                                .font(.headline)
+                            if presetsModel.presets.isNoEmpty {
+                                Menu("\(selectedPreset.name)"){
+                                    ForEach(presetsModel.presets) { preset in
+                                        HStack {
+                                            Button(preset.name) {selectedPreset = preset}
+                                            Spacer()
+                                            Button{
+                                                presetsModel.delete(preset: preset)
+                                            } label: {
+                                                Image(systemName: "trash")
+                                            }
+                                            .buttonStyle(BorderlessButtonStyle())
+                                        }
+                                    }
+                                }
+                            } else {
+                                Text("No saved presets")
                             }
                         }
                     
@@ -177,7 +198,6 @@ struct ContentView: View {
                                 }
                             }
                             .padding(8)
-                            
                         }
                     }
                 }
@@ -191,7 +211,7 @@ struct ContentView: View {
                         ForEach(0..<100) { i in
                             ScrollingRectangle(color: rectangleColor,dataModel: dataModel)
                                 .frame(height: CGFloat(rectangleSize))
-                                .padding(CGFloat(paddingSize))
+                                .padding(.vertical, CGFloat(paddingSize))
                         }
                     }
                     .padding()
@@ -206,7 +226,7 @@ struct ContentView: View {
                         ForEach(0..<100) { i in
                             ScrollingRectangle(color: rectangleColor, dataModel: dataModel)
                                 .frame(width: CGFloat(rectangleSize))
-                                .padding(CGFloat(paddingSize))
+                                .padding(.horizontal, CGFloat(paddingSize))
                         }
                     }
                     .padding()
@@ -214,6 +234,10 @@ struct ContentView: View {
                 .background(backgroundColor)
                 .ignoresSafeArea()
             }
+        }
+        .onChange(of: selectedPreset){ _, preset in
+            let loadedPreset = presetsModel.loadPreset(preset, dataModel: dataModel)
+            dataModel = loadedPreset
         }
         .sheet(isPresented: $modifierNameWindowShowing){
             CreateModifierView(modifierName: $modifierName){
@@ -271,13 +295,6 @@ struct ContentView: View {
     
 }
 
-
-
-
-#Preview{
-    ContentView()
-        .environmentObject(PresetsDataModel())
-}
 
 
 

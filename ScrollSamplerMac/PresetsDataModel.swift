@@ -6,35 +6,47 @@
 //
 
 import Foundation
+import SwiftData
 
-class PresetsDataModel: ObservableObject {
-    enum CodingKeys: String, CodingKey {
-        case _presets = "presets"
-    }
-    
-    @Published var presets = [DataModel]() {
-        didSet{
-            presets.forEach{ print($0.name) }
-            print("-------")
-        }
-    }
+@Observable
+class PresetsDataModel {
+    private(set)var presets: [Preset]
+
+    let savePath = FileManager().getDocumentsDirectory().appending(path: "SavedPresets")
     
     init() {
-        if presets.isEmpty {
-            let defaultPreset = DataModel()
-            let edgeOpacity = DataModel()
-            edgeOpacity.name = "Edge Opacity"
-            edgeOpacity.variants[0].opacity = 0.0
-            edgeOpacity.variants[2].opacity = 0.0
-            
-            self.presets.append(edgeOpacity)
-            self.presets.append(defaultPreset)
+        do {
+            let data = try Data(contentsOf: savePath)
+            presets = try JSONDecoder().decode([Preset].self, from: data)
+        } catch {
+            presets = []
         }
-        
     }
     
-    func copyPreset(name: String, dataModel: DataModel) -> DataModel {
-        let newPreset = DataModel()
+    func save() {
+        do {
+            let data = try JSONEncoder().encode(presets)
+            try data.write(to: savePath, options: [.atomic, .completeFileProtection])
+        } catch {
+            print("Unable to save data.")
+        }
+    }
+ 
+    func delete(preset: Preset){
+        guard let index = presets.firstIndex(of: preset) else { return }
+        presets.remove(at: index)
+        save()
+    }
+    
+    
+    func insertPreset(_ preset: Preset) {
+        presets.append(preset)
+        save()
+    }
+   
+    
+    func copyPreset(name: String, dataModel: DataModel) -> Preset {
+        var newPreset = Preset()
         newPreset.name = name
         for (index, variant) in dataModel.variants.enumerated() {
             newPreset.variants[index].id = variant.id
@@ -52,8 +64,28 @@ class PresetsDataModel: ObservableObject {
        return newPreset
     }
     
-    func savePreset(_ preset: DataModel) -> Void {
-        presets.append(preset)
-        
+    func loadPreset(_ preset: Preset, dataModel: DataModel) -> DataModel {
+        dataModel.name = preset.name
+        for (index, variant) in preset.variants.enumerated() {
+            dataModel.variants[index].id = variant.id
+            dataModel.variants[index].opacity = variant.opacity
+            dataModel.variants[index].scale = variant.scale
+            dataModel.variants[index].xOffset = variant.xOffset
+            dataModel.variants[index].yOffset = variant.yOffset
+            dataModel.variants[index].blur = variant.blur
+            dataModel.variants[index].saturation = variant.saturation
+            dataModel.variants[index].degrees = variant.degrees
+            dataModel.variants[index].rotationX = variant.rotationX
+            dataModel.variants[index].rotationY = variant.rotationY
+            dataModel.variants[index].rotationZ = variant.rotationZ
+        }
+        return dataModel
     }
+   
 }
+
+
+
+
+
+

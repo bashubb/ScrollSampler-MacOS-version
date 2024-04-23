@@ -6,16 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ScrollSamplerMacApp: App {
-    @StateObject private var presetsModel = PresetsDataModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .navigationTitle("Scroll Sampler")
-                .environmentObject(presetsModel)
-        }
+                .environment(PresetsDataModel())
+    }
         
         
     }
