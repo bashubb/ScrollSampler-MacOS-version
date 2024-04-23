@@ -1,6 +1,8 @@
-<img src="https://github.com/bashubb/ScrollSampler-MacOS-version/blob/main/comming_soon_appSTOREICON.png" width="30%">
+<img src="https://github.com/bashubb/ScrollSampler-MacOS-version/blob/main/comming_soon_appSTOREICON.png" width="20%">
 
-# ScrollSampler 🌀        
+  
+
+<img src="https://github.com/bashubb/ScrollSampler-MacOS-version/blob/main/Scroll%20Sampler.png" width="70%">    
 
 ScrollSampler is an innovative macOS application I designed for developers to explore and visualize dynamic scroll transitions. This powerful tool is key for crafting interactive and visually engaging user interfaces in applications.
 
