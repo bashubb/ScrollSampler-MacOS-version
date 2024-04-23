@@ -1,17 +1,25 @@
 //
-//  ScrollingRectangle.swift
+//  ActionButton.swift
 //  ScrollSamplerMac
 //
-//  Created by HubertMac on 18/04/2024.
+//  Created by HubertMac on 23/04/2024.
 //
 
 import SwiftUI
 
-struct ScrollingRectangle: View {
-    var color: Color
-    var dataModel: DataModel
+class UIComponents {
     
-    var body: some View {
+    @ViewBuilder
+    static func actionButton(with text: String, in color: Color) -> some View  {
+        Text(text)
+            .foregroundStyle(Color.white)
+            .padding(6)
+            .frame(width: 150, height: 40)
+            .background(color.opacity(0.8), in: RoundedRectangle(cornerRadius: 8))
+    }
+    
+    @ViewBuilder
+    static func scrollingRectangle(in color: Color, from dataModel: DataModel) -> some View {
         Rectangle()
             .fill(color)
             .scrollTransition { content, phase in
@@ -31,4 +39,8 @@ struct ScrollingRectangle: View {
                         ))
             }
     }
+    
 }
+ 
+
+

@@ -14,7 +14,7 @@ struct Preset: Hashable, Identifiable, Codable, Equatable {
     var variants: [PresetTransitionVariant]
     
     init(id: UUID = UUID(),
-         name: String = "",
+         name: String = "Default",
          variants: [PresetTransitionVariant] = [PresetTransitionVariant(id:"topLeading"), PresetTransitionVariant(id:"identity"), PresetTransitionVariant(id:"bottomTrailing")]) {
         self.id = id
         self.name = name

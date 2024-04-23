@@ -10,13 +10,18 @@ import SwiftData
 
 @main
 struct ScrollSamplerMacApp: App {
+    @State private var presetsModel = PresetsDataModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .navigationTitle("Scroll Sampler")
-                .environment(PresetsDataModel())
-    }
-        
+                .environment(presetsModel)
+        }
+        Window("Presets Manager", id: "presets") {
+            PresetsEditingView()
+                .environment(presetsModel)
+        }
         
     }
 }

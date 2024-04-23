@@ -14,10 +14,11 @@
 		B519E1CF2BD1427100A2C786 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1CE2BD1427100A2C786 /* DataModel.swift */; };
 		B519E1D12BD1600B00A2C786 /* PresetsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D02BD1600B00A2C786 /* PresetsDataModel.swift */; };
 		B519E1D32BD171B400A2C786 /* SavePresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D22BD171B400A2C786 /* SavePresetView.swift */; };
-		B519E1D52BD171D700A2C786 /* ScrollingRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D42BD171D700A2C786 /* ScrollingRectangle.swift */; };
 		B519E1D72BD1720800A2C786 /* CreateModifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519E1D62BD1720800A2C786 /* CreateModifierView.swift */; };
 		B55B6A222BD80C0000B551C9 /* FileManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55B6A212BD80C0000B551C9 /* FileManagerExtension.swift */; };
 		B55B6A242BD8104A00B551C9 /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55B6A232BD8104A00B551C9 /* CollectionExtensions.swift */; };
+		B55B6A262BD8330200B551C9 /* UIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55B6A252BD8330200B551C9 /* UIComponents.swift */; };
+		B55B6A282BD83E0700B551C9 /* PresetsEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */; };
 		B592540E2BD7DA21004DCD41 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592540D2BD7DA21004DCD41 /* Preset.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +32,11 @@
 		B519E1CE2BD1427100A2C786 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B519E1D02BD1600B00A2C786 /* PresetsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsDataModel.swift; sourceTree = "<group>"; };
 		B519E1D22BD171B400A2C786 /* SavePresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePresetView.swift; sourceTree = "<group>"; };
-		B519E1D42BD171D700A2C786 /* ScrollingRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingRectangle.swift; sourceTree = "<group>"; };
 		B519E1D62BD1720800A2C786 /* CreateModifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateModifierView.swift; sourceTree = "<group>"; };
 		B55B6A212BD80C0000B551C9 /* FileManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtension.swift; sourceTree = "<group>"; };
 		B55B6A232BD8104A00B551C9 /* CollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		B55B6A252BD8330200B551C9 /* UIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponents.swift; sourceTree = "<group>"; };
+		B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsEditingView.swift; sourceTree = "<group>"; };
 		B592540D2BD7DA21004DCD41 /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 				B519E1D22BD171B400A2C786 /* SavePresetView.swift */,
 				B519E1D62BD1720800A2C786 /* CreateModifierView.swift */,
 				B519E1C12BD1422700A2C786 /* ContentView.swift */,
+				B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,7 +115,7 @@
 		B592540C2BD7D954004DCD41 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				B519E1D42BD171D700A2C786 /* ScrollingRectangle.swift */,
+				B55B6A252BD8330200B551C9 /* UIComponents.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -190,13 +193,14 @@
 				B519E1D32BD171B400A2C786 /* SavePresetView.swift in Sources */,
 				B55B6A222BD80C0000B551C9 /* FileManagerExtension.swift in Sources */,
 				B519E1D72BD1720800A2C786 /* CreateModifierView.swift in Sources */,
+				B55B6A262BD8330200B551C9 /* UIComponents.swift in Sources */,
+				B55B6A282BD83E0700B551C9 /* PresetsEditingView.swift in Sources */,
 				B592540E2BD7DA21004DCD41 /* Preset.swift in Sources */,
 				B519E1C22BD1422700A2C786 /* ContentView.swift in Sources */,
 				B55B6A242BD8104A00B551C9 /* CollectionExtensions.swift in Sources */,
 				B519E1CF2BD1427100A2C786 /* DataModel.swift in Sources */,
 				B519E1D12BD1600B00A2C786 /* PresetsDataModel.swift in Sources */,
 				B519E1C02BD1422700A2C786 /* ScrollSamplerMacApp.swift in Sources */,
-				B519E1D52BD171D700A2C786 /* ScrollingRectangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

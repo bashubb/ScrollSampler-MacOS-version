@@ -11,6 +11,7 @@ import SwiftData
 
 
 struct ContentView: View {
+    @Environment(\.openWindow) var openWindow
     @Environment(PresetsDataModel.self) var presetsModel
     @State private var dataModel = DataModel()
     @State private var selectedPreset = Preset()
@@ -37,34 +38,22 @@ struct ContentView: View {
                 VStack(spacing: 3) {
                     Button {
                         dataModel = DataModel()
+                        selectedPreset = Preset()
                     } label: {
-                        Text("Reset")
-                            .foregroundStyle(Color.white)
-                            .padding(6)
-                            .frame(width: 150, height: 40)
-                            .background(Color.red.opacity(0.7), in: RoundedRectangle(cornerRadius: 8))
+                        UIComponents.actionButton(with: "Reset", in: .red)
                     }
                     
                     Button {
                         vertical.toggle()
                     } label: {
-                        Text("Change Orientation")
-                            .foregroundStyle(Color.white)
-                            .padding(6)
-                            .frame(width: 150, height: 40)
-                            .background(Color.green.opacity(0.8), in: RoundedRectangle(cornerRadius: 8))
+                        UIComponents.actionButton(with: "Change Orientation", in: .green)
                     }
                     
                     Button {
                         modifierNameWindowShowing = true
                     } label: {
-                        Text("Generate modifier")
-                            .foregroundStyle(Color.white)
-                            .padding(6)
-                            .frame(width: 150, height: 40)
-                            .background(Color.blue.opacity(0.8), in: RoundedRectangle(cornerRadius: 8))
+                        UIComponents.actionButton(with: "Generate Modifier", in: .blue)
                     }
-                    
                 }
                 .padding()
                 .buttonStyle(.plain)
@@ -84,7 +73,7 @@ struct ContentView: View {
                                 Text("Big").tag(300)
                         }
                         Picker("Padding", selection: $paddingSize) {
-                            Text("None").tag(0)
+                            Text("Tiny").tag(0)
                             Text("Small").tag(10)
                             Text("Medium").tag(20)
                             Text("Big").tag(40)
@@ -92,39 +81,54 @@ struct ContentView: View {
                         
                     }
                     Section("Presets") {
-                        HStack {
-                            Text("Select Preset")
-                                .font(.headline)
                             if presetsModel.presets.isNoEmpty {
-                                Menu("\(selectedPreset.name)"){
-                                    ForEach(presetsModel.presets) { preset in
-                                        HStack {
-                                            Button(preset.name) {selectedPreset = preset}
-                                            Spacer()
-                                            Button{
-                                                presetsModel.delete(preset: preset)
-                                            } label: {
-                                                Image(systemName: "trash")
+                                HStack {
+                                    Text("Select Preset")
+                                    Menu("\(selectedPreset.name)"){
+                                        ForEach(presetsModel.presets) { preset in
+                                            Button(preset.name) {
+                                                selectedPreset = preset
                                             }
-                                            .buttonStyle(BorderlessButtonStyle())
                                         }
                                     }
                                 }
                             } else {
                                 Text("No saved presets")
+                                    .font(.headline)
                             }
+                        HStack {
+                            Button {
+                                savePresetViewShowing.toggle()
+                            } label: {
+                                HStack {
+                                    Text("Save preset")
+                                    Image(systemName: "square.and.arrow.down")
+                                }
+                                .foregroundStyle(.white)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.green)
+                                
+                            Button {
+                                openWindow(id:"presets")
+                               
+                            } label: {
+                                HStack{
+                                    Text("Manage Presets")
+                                    Image(systemName: "trash")
+                                }
+                                .foregroundStyle(.white)
+                            }
+                            .disabled(presetsModel.presets.isEmpty)
+                            .buttonStyle(.borderedProminent)
+                            .tint(.orange)
                         }
-                    
-                        
-                        Button("Save new preset"){
-                            savePresetViewShowing.toggle()
-                        }
+                        .containerRelativeFrame(.horizontal)
                     }
                     
                     ForEach(dataModel.variants) { variant in
                         @Bindable var variant = variant
                         Section(variant.id) {
-                            
                             Group {
                                 HStack {
                                     Text("Opacity")
@@ -203,13 +207,13 @@ struct ContentView: View {
                 }
                 .listStyle(.inset)
             }
-            .frame(minWidth: 250)
+            .frame(minWidth: 280)
         } detail: {
             if vertical {
                 ScrollView {
                     VStack {
                         ForEach(0..<100) { i in
-                            ScrollingRectangle(color: rectangleColor,dataModel: dataModel)
+                            UIComponents.scrollingRectangle(in: rectangleColor, from: dataModel)
                                 .frame(height: CGFloat(rectangleSize))
                                 .padding(.vertical, CGFloat(paddingSize))
                         }
@@ -224,7 +228,7 @@ struct ContentView: View {
                 ScrollView(.horizontal) {
                     HStack {
                         ForEach(0..<100) { i in
-                            ScrollingRectangle(color: rectangleColor, dataModel: dataModel)
+                            UIComponents.scrollingRectangle(in: rectangleColor, from: dataModel)
                                 .frame(width: CGFloat(rectangleSize))
                                 .padding(.horizontal, CGFloat(paddingSize))
                         }
@@ -241,7 +245,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $modifierNameWindowShowing){
             CreateModifierView(modifierName: $modifierName){
-                createModifier($0)
+                dataModel.createModifier($0)
             }
         }
         .sheet(isPresented: $savePresetViewShowing) {
@@ -254,47 +258,10 @@ struct ContentView: View {
         formatter = NumberFormatter()
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
-        
     }
-    
-    func createModifier(_ name: String) -> String {
-        // Creates string with custom modifier and View extension
-        
-        let modifier = """
-        struct Scroller: ViewModifier {
-            func body(content: Content) -> some View {
-                content
-                    .scrollTransition { element, phase in
-                        element
-                            .opacity(phase == .topLeading ? \(dataModel.variants[0].opacity) : phase == .identity ? \(dataModel.variants[1].opacity) : \(dataModel.variants[2].opacity))
-                            .offset(x: phase == .topLeading ? \(dataModel.variants[0].xOffset) : phase == .identity ? \(dataModel.variants[1].xOffset) : \(dataModel.variants[2].xOffset))
-                            .offset(y: phase == .topLeading ? \(dataModel.variants[0].yOffset) : phase == .identity ? \(dataModel.variants[1].yOffset) : \(dataModel.variants[2].yOffset))
-                            .scaleEffect(phase == .topLeading ? \(dataModel.variants[0].scale) : phase == .identity ? \(dataModel.variants[1].scale) : \(dataModel.variants[2].scale))
-                            .blur(radius: phase == .topLeading ? \(dataModel.variants[0].blur) : phase == .identity ? \(dataModel.variants[1].blur) : \(dataModel.variants[2].blur))
-                            .saturation(phase == .topLeading ? \(dataModel.variants[0].saturation) : phase == .identity ? \(dataModel.variants[1].saturation) : \(dataModel.variants[2].saturation))
-                            .rotation3DEffect(
-                                Angle(degrees: phase == .topLeading ? \(dataModel.variants[0].degrees) : phase == .identity ? \(dataModel.variants[1].degrees) : \(dataModel.variants[2].degrees)),
-                                axis: (
-                                    x: CGFloat(phase == .topLeading ? \(dataModel.variants[0].rotationX) : phase == .identity ? \(dataModel.variants[1].rotationX) : \(dataModel.variants[2].rotationX)),
-                                    y: CGFloat(phase == .topLeading ? \(dataModel.variants[0].rotationY) : phase == .identity ? \(dataModel.variants[1].rotationY) : \(dataModel.variants[2].rotationY)),
-                                    z: CGFloat(phase == .topLeading ? \(dataModel.variants[0].rotationZ) : phase == .identity ? \(dataModel.variants[1].rotationZ) : \(dataModel.variants[2].rotationZ))
-                                ))
-                    }
-            }
-        }
-        
-        extension View {
-            func \(name)() -> some View {
-                modifier(Scroller())
-            }
-        }
-        """
-        
-        return  modifier
-    }
-    
 }
 
-
-
-
+#Preview {
+    ContentView()
+        .environment(PresetsDataModel())
+}
