@@ -117,7 +117,8 @@ struct ContentView: View {
                                     Text("Manage Presets")
                                     Image(systemName: "trash")
                                 }
-                                .foregroundStyle(.white)
+                                .foregroundStyle(
+                                    presetsModel.presets.isEmpty ? .gray.opacity(0.5) : .white)
                             }
                             .disabled(presetsModel.presets.isEmpty)
                             .buttonStyle(.borderedProminent)
@@ -236,6 +237,7 @@ struct ContentView: View {
                     .padding()
                 }
                 .background(backgroundColor)
+                .toolbar(.hidden)
                 .ignoresSafeArea()
             }
         }
@@ -251,6 +253,14 @@ struct ContentView: View {
         .sheet(isPresented: $savePresetViewShowing) {
             SavePresetView(dataModel: dataModel)
         }
+        .frame(
+            minWidth: 500,
+            idealWidth: 600,
+            maxWidth: .infinity,
+            minHeight: 500,
+            idealHeight: 600,
+            maxHeight: .infinity
+        )
         
     }
     

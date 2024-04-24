@@ -74,9 +74,7 @@
 				B592540B2BD7D8C4004DCD41 /* Views */,
 				B592540C2BD7D954004DCD41 /* Helpers */,
 				B55B6A202BD80BE200B551C9 /* Extensions */,
-				B519E1CE2BD1427100A2C786 /* DataModel.swift */,
-				B519E1D02BD1600B00A2C786 /* PresetsDataModel.swift */,
-				B592540D2BD7DA21004DCD41 /* Preset.swift */,
+				B55B6A292BD9287600B551C9 /* Logic&Data */,
 				B519E1C32BD1422A00A2C786 /* Assets.xcassets */,
 				B519E1C82BD1422A00A2C786 /* ScrollSamplerMac.entitlements */,
 				B519E1C52BD1422A00A2C786 /* Preview Content */,
@@ -101,12 +99,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		B55B6A292BD9287600B551C9 /* Logic&Data */ = {
+			isa = PBXGroup;
+			children = (
+				B519E1D02BD1600B00A2C786 /* PresetsDataModel.swift */,
+				B592540D2BD7DA21004DCD41 /* Preset.swift */,
+				B519E1CE2BD1427100A2C786 /* DataModel.swift */,
+			);
+			path = "Logic&Data";
+			sourceTree = "<group>";
+		};
 		B592540B2BD7D8C4004DCD41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B519E1C12BD1422700A2C786 /* ContentView.swift */,
 				B519E1D22BD171B400A2C786 /* SavePresetView.swift */,
 				B519E1D62BD1720800A2C786 /* CreateModifierView.swift */,
-				B519E1C12BD1422700A2C786 /* ContentView.swift */,
 				B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */,
 			);
 			path = Views;
