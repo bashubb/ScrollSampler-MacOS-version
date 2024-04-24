@@ -18,6 +18,27 @@ struct ScrollSamplerMacApp: App {
                 .navigationTitle("Scroll Sampler")
                 .environment(presetsModel)
         }
+        .commands {
+                    CommandGroup(replacing: .appInfo) {
+                        Button("About ScrollSampler") {
+                            NSApplication.shared.orderFrontStandardAboutPanel(
+                                options: [
+                                    NSApplication.AboutPanelOptionKey.credits: NSAttributedString(
+                                        string: "This app was made to make life easier",
+                                        attributes: [
+                                            NSAttributedString.Key.font: NSFont.boldSystemFont(
+                                                ofSize: NSFont.smallSystemFontSize)
+                                        ]
+                                    ),
+                                    NSApplication.AboutPanelOptionKey(
+                                        rawValue: "Copyright"
+                                    ): "© 2024 HUBERT KIELKOWSKI"
+                                ]
+                            )
+                        }
+                    }
+                }
+        
         Window("Presets Manager", id: "presets") {
             PresetsEditingView()
                 .environment(presetsModel)

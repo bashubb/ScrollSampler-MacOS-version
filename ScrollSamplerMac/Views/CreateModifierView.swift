@@ -11,7 +11,7 @@ struct CreateModifierView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var modifierName: String
-    @State private var buttonText = "Copy modifer to clipboard"
+    @State private var modifierCopied = false
     
     private let pasteboard = NSPasteboard.general
     var createModifier: (String) -> String
@@ -27,23 +27,22 @@ struct CreateModifierView: View {
                 .textFieldStyle(.roundedBorder)
                 .padding()
             
-            Button(buttonText) {
+            Button("Copy modifier") {
                 pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
                 pasteboard.setString(createModifier(modifierName), forType: .string)
-                
-                withAnimation {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        buttonText = "Copied!"
-                    }
-                }
-                modifierName = ""
-                dismiss()
+                modifierCopied = true  
             }
             .disabled(modifierName == "")
             .buttonStyle(.borderedProminent)
             
         }
         .padding()
+        .alert("Modifier \(modifierName) Copied", isPresented: $modifierCopied){
+            Button("OK") {
+                modifierName = ""
+                dismiss()
+            }
+        }
         .toolbar{
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel", role: .cancel) {

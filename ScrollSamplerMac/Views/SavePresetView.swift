@@ -13,13 +13,11 @@ struct SavePresetView: View {
     
     @Environment(\.dismiss) var dismiss
     @State var presetName = ""
-    @State private var buttonText = "Save new preset"
-
-    
+    @State private var presetSaved = false
     
     var body: some View {
         VStack(alignment:.leading) {
-            Text("Save new Preset")
+            Text("Save New Preset")
                 .font(.title)
                 .padding()
             Divider()
@@ -28,21 +26,19 @@ struct SavePresetView: View {
                 .textFieldStyle(.roundedBorder)
                 .padding()
             
-            Button(buttonText) {
+            Button("Save new preset") {
                 presetsModel.insertPreset(presetsModel.copyPreset(name: presetName, dataModel: dataModel))
-                
-                withAnimation {
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        buttonText = "Saved!"
-                    }
-                }
-                presetName = ""
-                dismiss()
+                presetSaved = true
             }
             .disabled(presetName == "")
             .buttonStyle(.borderedProminent)
             
+        }
+        .alert("Preset \(presetName) Saved", isPresented: $presetSaved) {
+            Button("OK") {
+                presetName = ""
+                dismiss()
+            }
         }
         .padding()
         .toolbar{

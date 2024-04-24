@@ -18,8 +18,7 @@ struct ContentView: View {
     
     @State private var vertical = true
     
-    
-    @State private var modifierNameWindowShowing = false
+    @State private var createModifierWindowShowing = false
     @State private var modifierName = ""
     
     @State private var savePresetViewShowing = false
@@ -29,35 +28,36 @@ struct ContentView: View {
     @State private var backgroundColor: Color = .clear
     @State private var paddingSize = 0
     
-    
     let formatter: NumberFormatter
     
     var body: some View {
         NavigationSplitView {
             VStack(spacing:0) {
+                // Action Buttons
                 VStack(spacing: 3) {
                     Button {
                         dataModel = DataModel()
                         selectedPreset = Preset()
                     } label: {
-                        UIComponents.actionButton(with: "Reset", in: .red)
+                        actionButton(with: "Reset", in: .red)
                     }
                     
                     Button {
                         vertical.toggle()
                     } label: {
-                        UIComponents.actionButton(with: "Change Orientation", in: .green)
+                        actionButton(with: "Change Orientation", in: .green)
                     }
                     
                     Button {
-                        modifierNameWindowShowing = true
+                        createModifierWindowShowing = true
                     } label: {
-                        UIComponents.actionButton(with: "Generate Modifier", in: .blue)
+                        actionButton(with: "Generate Modifier", in: .blue)
                     }
                 }
                 .padding()
                 .buttonStyle(.plain)
                 
+                // Sidebar
                 List {
                     Section("Content Options") {
                         ColorPicker("Content Color", selection: $rectangleColor, supportsOpacity: true)
@@ -96,6 +96,7 @@ struct ContentView: View {
                                 Text("No saved presets")
                                     .font(.headline)
                             }
+                        
                         HStack {
                             Button {
                                 savePresetViewShowing.toggle()
@@ -127,6 +128,7 @@ struct ContentView: View {
                         .containerRelativeFrame(.horizontal)
                     }
                     
+                    // Scroll effects controllers
                     ForEach(dataModel.variants) { variant in
                         @Bindable var variant = variant
                         Section(variant.id) {
@@ -211,10 +213,11 @@ struct ContentView: View {
             .frame(minWidth: 280)
         } detail: {
             if vertical {
+                // Vertical Content
                 ScrollView {
                     VStack {
                         ForEach(0..<100) { i in
-                            UIComponents.scrollingRectangle(in: rectangleColor, from: dataModel)
+                            scrollingRectangle(in: rectangleColor, from: dataModel)
                                 .frame(height: CGFloat(rectangleSize))
                                 .padding(.vertical, CGFloat(paddingSize))
                         }
@@ -226,10 +229,11 @@ struct ContentView: View {
                 .ignoresSafeArea()
             }
             else {
+                // Horizontal Content
                 ScrollView(.horizontal) {
                     HStack {
                         ForEach(0..<100) { i in
-                            UIComponents.scrollingRectangle(in: rectangleColor, from: dataModel)
+                            scrollingRectangle(in: rectangleColor, from: dataModel)
                                 .frame(width: CGFloat(rectangleSize))
                                 .padding(.horizontal, CGFloat(paddingSize))
                         }
@@ -245,7 +249,7 @@ struct ContentView: View {
             let loadedPreset = presetsModel.loadPreset(preset, dataModel: dataModel)
             dataModel = loadedPreset
         }
-        .sheet(isPresented: $modifierNameWindowShowing){
+        .sheet(isPresented: $createModifierWindowShowing){
             CreateModifierView(modifierName: $modifierName){
                 dataModel.createModifier($0)
             }
@@ -253,6 +257,7 @@ struct ContentView: View {
         .sheet(isPresented: $savePresetViewShowing) {
             SavePresetView(dataModel: dataModel)
         }
+        
         .frame(
             minWidth: 500,
             idealWidth: 600,

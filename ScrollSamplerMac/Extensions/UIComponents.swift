@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-class UIComponents {
+// UI Components
+extension ContentView {
     
     @ViewBuilder
-    static func actionButton(with text: String, in color: Color) -> some View  {
+    func actionButton(with text: String, in color: Color) -> some View  {
         Text(text)
             .foregroundStyle(Color.white)
             .padding(6)
@@ -19,7 +20,7 @@ class UIComponents {
     }
     
     @ViewBuilder
-    static func scrollingRectangle(in color: Color, from dataModel: DataModel) -> some View {
+    func scrollingRectangle(in color: Color, from dataModel: DataModel) -> some View {
         Rectangle()
             .fill(color)
             .scrollTransition { content, phase in

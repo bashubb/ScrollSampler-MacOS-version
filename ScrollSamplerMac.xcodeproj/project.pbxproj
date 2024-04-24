@@ -72,7 +72,6 @@
 			children = (
 				B519E1BF2BD1422700A2C786 /* ScrollSamplerMacApp.swift */,
 				B592540B2BD7D8C4004DCD41 /* Views */,
-				B592540C2BD7D954004DCD41 /* Helpers */,
 				B55B6A202BD80BE200B551C9 /* Extensions */,
 				B55B6A292BD9287600B551C9 /* Logic&Data */,
 				B519E1C32BD1422A00A2C786 /* Assets.xcassets */,
@@ -93,6 +92,7 @@
 		B55B6A202BD80BE200B551C9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B55B6A252BD8330200B551C9 /* UIComponents.swift */,
 				B55B6A212BD80C0000B551C9 /* FileManagerExtension.swift */,
 				B55B6A232BD8104A00B551C9 /* CollectionExtensions.swift */,
 			);
@@ -118,14 +118,6 @@
 				B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		B592540C2BD7D954004DCD41 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				B55B6A252BD8330200B551C9 /* UIComponents.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,8 +343,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ScrollSampler;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Hubert Kiełkowski ©";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -381,8 +374,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ScrollSampler;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Hubert Kiełkowski ©";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
