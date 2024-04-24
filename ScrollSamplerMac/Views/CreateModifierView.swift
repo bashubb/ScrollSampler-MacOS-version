@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct CreateModifierView: View {
+    @Environment(\.requestReview) var requestReview
     @Environment(\.dismiss) var dismiss
+    
+    @State private var counter = 0
     
     @Binding var modifierName: String
     @State private var modifierCopied = false
@@ -32,7 +36,7 @@ struct CreateModifierView: View {
                 pasteboard.setString(createModifier(modifierName), forType: .string)
                 modifierCopied = true  
             }
-            .disabled(modifierName == "")
+            .disabled(modifierName.isReallyEmpty)
             .buttonStyle(.borderedProminent)
             
         }
@@ -41,6 +45,12 @@ struct CreateModifierView: View {
             Button("OK") {
                 modifierName = ""
                 dismiss()
+            }
+        }
+        .onChange(of: counter) {
+            if counter > 10 {
+                requestReview()
+                counter = 0
             }
         }
         .toolbar{

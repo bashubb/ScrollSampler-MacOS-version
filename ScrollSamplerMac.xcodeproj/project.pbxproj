@@ -20,6 +20,7 @@
 		B55B6A262BD8330200B551C9 /* UIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55B6A252BD8330200B551C9 /* UIComponents.swift */; };
 		B55B6A282BD83E0700B551C9 /* PresetsEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */; };
 		B592540E2BD7DA21004DCD41 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592540D2BD7DA21004DCD41 /* Preset.swift */; };
+		B5EA53ED2BD969EF0075196F /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EA53EC2BD969EF0075196F /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B55B6A252BD8330200B551C9 /* UIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponents.swift; sourceTree = "<group>"; };
 		B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsEditingView.swift; sourceTree = "<group>"; };
 		B592540D2BD7DA21004DCD41 /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
+		B5EA53EC2BD969EF0075196F /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				B55B6A252BD8330200B551C9 /* UIComponents.swift */,
 				B55B6A212BD80C0000B551C9 /* FileManagerExtension.swift */,
 				B55B6A232BD8104A00B551C9 /* CollectionExtensions.swift */,
+				B5EA53EC2BD969EF0075196F /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				B592540E2BD7DA21004DCD41 /* Preset.swift in Sources */,
 				B519E1C22BD1422700A2C786 /* ContentView.swift in Sources */,
 				B55B6A242BD8104A00B551C9 /* CollectionExtensions.swift in Sources */,
+				B5EA53ED2BD969EF0075196F /* StringExtension.swift in Sources */,
 				B519E1CF2BD1427100A2C786 /* DataModel.swift in Sources */,
 				B519E1D12BD1600B00A2C786 /* PresetsDataModel.swift in Sources */,
 				B519E1C02BD1422700A2C786 /* ScrollSamplerMacApp.swift in Sources */,

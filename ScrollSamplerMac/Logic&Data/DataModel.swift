@@ -113,7 +113,7 @@ class DataModel: Identifiable, Hashable {
                                 x: CGFloat(phase == .topLeading ? \(variants[0].rotationX) : phase == .identity ? \(variants[1].rotationX) : \(variants[2].rotationX)),
                                 y: CGFloat(phase == .topLeading ? \(variants[0].rotationY) : phase == .identity ? \(variants[1].rotationY) : \(variants[2].rotationY)),
                                 z: CGFloat(phase == .topLeading ? \(variants[0].rotationZ) : phase == .identity ? \(variants[1].rotationZ) : \(variants[2].rotationZ))
-                            ))/n
+                            ))\n
         """
         }
         

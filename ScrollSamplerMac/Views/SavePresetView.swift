@@ -30,7 +30,7 @@ struct SavePresetView: View {
                 presetsModel.insertPreset(presetsModel.copyPreset(name: presetName, dataModel: dataModel))
                 presetSaved = true
             }
-            .disabled(presetName == "")
+            .disabled(presetName.isReallyEmpty)
             .buttonStyle(.borderedProminent)
             
         }
