@@ -24,3 +24,7 @@ ScrollSampler is an innovative macOS application I designed for developers to ex
 ## Vision 🌟
 
 I am committed to empowering macOS developers by providing an advanced, intuitive tool that supports not just the exploration of scroll dynamics but also the practical implementation of these effects into live applications. My vision for ScrollSampler is to make it an indispensable part of a developer's toolkit, pushing the boundaries of user interface design and enabling creators to deliver top-tier user experiences.
+
+## Preview 🖼️
+
+<img src="https://github.com/bashubb/ScrollSampler-MacOS-version/blob/main/Scroll.gif">
