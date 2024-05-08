@@ -40,6 +40,7 @@
 		B55B6A272BD83E0700B551C9 /* PresetsEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetsEditingView.swift; sourceTree = "<group>"; };
 		B592540D2BD7DA21004DCD41 /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
 		B5EA53EC2BD969EF0075196F /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		B5EA53EE2BDA4E7A0075196F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +73,7 @@
 		B519E1BE2BD1422700A2C786 /* ScrollSamplerMac */ = {
 			isa = PBXGroup;
 			children = (
+				B5EA53EE2BDA4E7A0075196F /* Info.plist */,
 				B519E1BF2BD1422700A2C786 /* ScrollSamplerMacApp.swift */,
 				B592540B2BD7D8C4004DCD41 /* Views */,
 				B55B6A202BD80BE200B551C9 /* Extensions */,
@@ -158,7 +160,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B519E1B72BD1422700A2C786 /* Build configuration list for PBXProject "ScrollSamplerMac" */;
+			buildConfigurationList = B519E1B72BD1422700A2C786 /* Build configuration list for PBXProject "Scroll Sampler" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -347,6 +349,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScrollSamplerMac/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ScrollSampler;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Hubert Kiełkowski ©";
@@ -354,7 +357,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.ScrollSamplerMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -378,6 +381,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ScrollSamplerMac/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ScrollSampler;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Hubert Kiełkowski ©";
@@ -385,7 +389,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.ScrollSamplerMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -396,7 +400,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B519E1B72BD1422700A2C786 /* Build configuration list for PBXProject "ScrollSamplerMac" */ = {
+		B519E1B72BD1422700A2C786 /* Build configuration list for PBXProject "Scroll Sampler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B519E1C92BD1422A00A2C786 /* Debug */,
