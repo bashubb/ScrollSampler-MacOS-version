@@ -1,4 +1,4 @@
-<img src="https://github.com/bashubb/ScrollSampler-MacOS-version/blob/main/comming_soon_appSTOREICON.png" width="20%"
+
 
   
 
