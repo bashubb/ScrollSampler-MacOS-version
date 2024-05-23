@@ -258,7 +258,14 @@ struct ContentView: View {
             SavePresetView(dataModel: dataModel)
         }
         
-        .frame(minWidth: 700, minHeight: 300)
+        .frame(
+            minWidth: 700,
+            idealWidth: 900,
+            maxWidth: .infinity,
+            minHeight: 300,
+            idealHeight: 500,
+            maxHeight: .infinity
+        )
         
     }
     

@@ -24,7 +24,7 @@ struct ScrollSamplerMacApp: App {
                             NSApplication.shared.orderFrontStandardAboutPanel(
                                 options: [
                                     NSApplication.AboutPanelOptionKey.credits: NSAttributedString(
-                                        string: "This app was made to make life easier",
+                                        string: "This app was made to make life easier.",
                                         attributes: [
                                             NSAttributedString.Key.font: NSFont.boldSystemFont(
                                                 ofSize: NSFont.smallSystemFontSize)
@@ -38,6 +38,7 @@ struct ScrollSamplerMacApp: App {
                         }
                     }
                 }
+        .defaultSize(CGSize(width: 800, height: 400))
         
         Window("Presets Manager", id: "presets") {
             PresetsEditingView()
